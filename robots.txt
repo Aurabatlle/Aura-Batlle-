@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://aurabattle.netlify.app/sitemap.xml
+
+Sitemap: https://aurabatlle.netlify.app/sitemap.xml
