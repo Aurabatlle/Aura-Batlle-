@@ -83,11 +83,25 @@
             flex-direction: column;
         }
         
+        .logo-text .play-win {
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: -5px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease 2s;
+        }
+        
         .logo-text .aura-battle {
             font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
             letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease 2s;
         }
         
         .logo-text .aura-battle span:first-child {
@@ -153,7 +167,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 70vh;
+            height: 100vh;
             z-index: -1;
             overflow: hidden;
         }
@@ -179,20 +193,25 @@
         #home {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
             text-align: center;
-            height: 70vh;
+            height: 100vh;
+            padding-bottom: 150px;
         }
         
         .hero-content {
             max-width: 800px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease;
+            margin-bottom: 100px;
         }
         
-        .hero-content.visible {
+        .hero-heading {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 2s;
+        }
+        
+        .hero-heading.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -227,6 +246,11 @@
             gap: 40px;
             margin: 50px 0;
             flex-wrap: wrap;
+            position: absolute;
+            bottom: -100px;
+            left: 0;
+            width: 100%;
+            padding: 0 5%;
         }
         
         .stat-box {
@@ -259,6 +283,14 @@
         .download-container {
             position: relative;
             margin: 40px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 2s;
+        }
+        
+        .download-container.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .download-btn {
@@ -377,7 +409,7 @@
         /* About Section */
         #about {
             background: var(--dark-bg);
-            padding-top: 120px;
+            padding-top: 200px;
         }
         
         .about-content {
@@ -821,6 +853,8 @@
             
             .stats-container {
                 gap: 20px;
+                position: relative;
+                bottom: -50px;
             }
             
             .stat-box {
@@ -866,6 +900,15 @@
             .about-content, .terms-content, .rules-container {
                 padding: 20px;
             }
+            
+            .stats-container {
+                gap: 15px;
+            }
+            
+            .stat-box {
+                min-width: 120px;
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
@@ -882,6 +925,7 @@
         <div class="logo-container">
             <img src="unnamed.png" alt="Aura Battle Logo">
             <div class="logo-text">
+                <span class="play-win">PLAY & WIN</span>
                 <div class="aura-battle">
                     <span>AURA</span> <span>BATTLE</span>
                 </div>
@@ -908,26 +952,9 @@
         <!-- Home Section -->
         <section id="home">
             <div class="hero-content">
-                <h1><span>AURA</span> <span>BATTLE</span></h1>
-                <h2>THE ULTIMATE FREE FIRE TOURNAMENT PLATFORM</h2>
-                
-                <div class="stats-container">
-                    <div class="stat-box">
-                        <div class="stat-number" id="prizeCount">₹0</div>
-                        <div class="stat-label">Daily Prizes</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" id="playerCount">0</div>
-                        <div class="stat-label">Active Players</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" id="tournamentCount">0</div>
-                        <div class="stat-label">Tournaments</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" id="winnerCount">0</div>
-                        <div class="stat-label">Daily Winners</div>
-                    </div>
+                <div class="hero-heading">
+                    <h1><span>AURA</span> <span>BATTLE</span></h1>
+                    <h2>THE ULTIMATE FREE FIRE TOURNAMENT PLATFORM</h2>
                 </div>
                 
                 <div class="download-container">
@@ -936,7 +963,25 @@
                         <span class="icon"><i class="fas fa-download"></i></span>
                         <span class="flare"></span>
                     </button>
-                    <div class="download-info">Version 1.0 | 25MB | Free Fire MAX Compatible</div>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number" id="prizeCount">₹0</div>
+                    <div class="stat-label">Daily Prizes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="playerCount">0</div>
+                    <div class="stat-label">Active Players</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="tournamentCount">0</div>
+                    <div class="stat-label">Tournaments</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="winnerCount">0</div>
+                    <div class="stat-label">Daily Winners</div>
                 </div>
             </div>
             
@@ -1208,9 +1253,14 @@
                 });
             });
             
-            // Show hero content after delay
+            // Show elements after delay
             setTimeout(() => {
-                document.querySelector('.hero-content').classList.add('visible');
+                document.querySelector('.hero-heading').classList.add('visible');
+                document.querySelector('.download-container').classList.add('visible');
+                document.querySelector('.logo-text .play-win').style.opacity = '1';
+                document.querySelector('.logo-text .play-win').style.transform = 'translateY(0)';
+                document.querySelector('.logo-text .aura-battle').style.opacity = '1';
+                document.querySelector('.logo-text .aura-battle').style.transform = 'translateY(0)';
             }, 2000);
             
             // Animated Counter for Stats
