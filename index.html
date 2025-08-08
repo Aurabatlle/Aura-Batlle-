@@ -28,12 +28,14 @@
     <style>
         /* Base Styles */
         :root {
-            --primary: #FF5F1F;
-            --secondary: #FF8C00;
-            --accent: #FFD700;
+            --primary: #FF0000;
+            --secondary: #D10000;
+            --accent: #FF3333;
             --dark: #0A0A0A;
             --light: #F5F5F5;
             --success: #00C853;
+            --dark-bg: #111111;
+            --card-bg: #1A1A1A;
         }
         
         * {
@@ -61,9 +63,9 @@
             align-items: center;
             justify-content: space-between;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(17, 17, 17, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 95, 31, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
         }
         
         .logo-container {
@@ -81,22 +83,20 @@
             flex-direction: column;
         }
         
-        .logo-text .play-win {
-            font-size: 10px;
-            color: var(--accent);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: -5px;
+        .logo-text .aura-battle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         
-        .logo-text .aura-battle {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
+        .logo-text .aura-battle span:first-child {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        .logo-text .aura-battle span:last-child {
+            color: white;
         }
         
         /* Navigation */
@@ -144,6 +144,7 @@
             font-size: 24px;
             color: var(--light);
             cursor: pointer;
+            z-index: 1001;
         }
         
         /* Video Background */
@@ -152,7 +153,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 70vh;
             z-index: -1;
             overflow: hidden;
         }
@@ -161,15 +162,6 @@
             min-width: 100%;
             min-height: 100%;
             object-fit: cover;
-        }
-        
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
         }
         
         /* Main Content */
@@ -190,27 +182,43 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            height: 70vh;
         }
         
         .hero-content {
             max-width: 800px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+        
+        .hero-content.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .hero-content h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 3px;
+        }
+        
+        .hero-content h1 span:first-child {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        .hero-content h1 span:last-child {
+            color: white;
         }
         
         .hero-content h2 {
             font-size: 1.5rem;
             margin-bottom: 30px;
-            color: var(--accent);
+            color: var(--light);
+            opacity: 0.9;
         }
         
         .stats-container {
@@ -222,13 +230,13 @@
         }
         
         .stat-box {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(26, 26, 26, 0.8);
             border-radius: 10px;
             padding: 20px 30px;
             min-width: 180px;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 95, 31, 0.2);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .stat-number {
@@ -259,28 +267,36 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 18px 40px;
-            border-radius: 50px;
+            border-radius: 0;
             text-decoration: none;
             font-size: 1.2rem;
             font-weight: 600;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(255, 95, 31, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
             z-index: 1;
             border: none;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         .download-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 95, 31, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
         }
         
         .download-btn:active {
-            transform: translateY(0);
+            transform: scale(1);
         }
         
         .download-btn::before {
@@ -327,11 +343,97 @@
             color: rgba(255, 255, 255, 0.7);
         }
         
-        /* Tournaments Section */
-        .tournaments-section {
-            margin-top: 80px;
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
         }
         
+        .scroll-down::after {
+            content: '';
+            width: 2px;
+            height: 50px;
+            background: var(--primary);
+            margin-top: 10px;
+            animation: scrollAnimation 2s infinite;
+        }
+        
+        @keyframes scrollAnimation {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(20px); opacity: 0.5; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* About Section */
+        #about {
+            background: var(--dark-bg);
+            padding-top: 120px;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-content h3 {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .features {
+            margin-top: 30px;
+        }
+        
+        .features h4 {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .features ul {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            list-style: none;
+        }
+        
+        .features li {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .features li i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Tournaments Section */
         .section-title {
             text-align: center;
             font-family: 'Oxanium', sans-serif;
@@ -362,19 +464,18 @@
         }
         
         .tournament-card {
-            background: rgba(10, 10, 10, 0.7);
+            background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
             width: 300px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 95, 31, 0.3);
+            border: 1px solid rgba(255, 0, 0, 0.3);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .tournament-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 95, 31, 0.2);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
             border-color: var(--primary);
         }
         
@@ -440,66 +541,9 @@
             left: 0;
         }
         
-        /* About Section */
-        #about {
-            background: rgba(10, 10, 10, 0.9);
-        }
-        
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(20, 20, 20, 0.7);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 95, 31, 0.3);
-        }
-        
-        .about-content h3 {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .about-content p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .features {
-            margin-top: 30px;
-        }
-        
-        .features h4 {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-        
-        .features ul {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            list-style: none;
-        }
-        
-        .features li {
-            display: flex;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .features li i {
-            color: var(--primary);
-            margin-right: 10px;
-            font-size: 0.9rem;
-        }
-        
         /* Contact Section */
         #contact {
-            background: rgba(10, 10, 10, 0.95);
+            background: var(--dark-bg);
         }
         
         .contact-container {
@@ -512,19 +556,19 @@
         }
         
         .contact-card {
-            background: rgba(20, 20, 20, 0.7);
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 30px;
             width: 300px;
             text-align: center;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 95, 31, 0.3);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .contact-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 95, 31, 0.2);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
             border-color: var(--primary);
         }
         
@@ -600,17 +644,17 @@
         
         /* Terms Section */
         #terms {
-            background: rgba(10, 10, 10, 0.9);
+            background: var(--dark-bg);
         }
         
         .terms-content {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(20, 20, 20, 0.7);
+            background: var(--card-bg);
             padding: 40px;
             border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 95, 31, 0.3);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .terms-section {
@@ -644,17 +688,17 @@
         
         /* Game Rules Section */
         #rules {
-            background: rgba(10, 10, 10, 0.95);
+            background: var(--dark-bg);
         }
         
         .rules-container {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(20, 20, 20, 0.7);
+            background: var(--card-bg);
             padding: 40px;
             border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 95, 31, 0.3);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .rules-category {
@@ -667,7 +711,7 @@
             color: var(--primary);
             margin-bottom: 15px;
             padding-bottom: 5px;
-            border-bottom: 1px solid rgba(255, 95, 31, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
         }
         
         .rules-list {
@@ -693,7 +737,7 @@
             background: #000;
             padding: 30px 5%;
             text-align: center;
-            border-top: 1px solid rgba(255, 95, 31, 0.3);
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
         }
         
         .footer-logo {
@@ -728,29 +772,29 @@
             font-size: 0.8rem;
         }
         
-        /* Scroll Down Indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--light);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-20px) translateX(-50%); }
-            60% { transform: translateY(-10px) translateX(-50%); }
-        }
-        
         /* Responsive Design */
         @media (max-width: 992px) {
             nav ul {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--dark-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.3s ease;
+                z-index: 1000;
+                border-left: 1px solid rgba(255, 0, 0, 0.3);
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 20px 0;
             }
             
             .mobile-menu-btn {
@@ -831,16 +875,16 @@
         <video autoplay muted loop id="bgVideo">
             <source src="background-video.mp4" type="video/mp4">
         </video>
-        <div class="video-overlay"></div>
     </div>
 
     <!-- Header -->
     <header>
         <div class="logo-container">
-            <img src="unnamed.png" alt="Aura Battle Logo">
+            <img src="https://via.placeholder.com/40x40" alt="Aura Battle Logo">
             <div class="logo-text">
-                <span class="play-win">PLAY & WIN</span>
-                <span class="aura-battle">AURA BATTLE</span>
+                <div class="aura-battle">
+                    <span>AURA</span> <span>BATTLE</span>
+                </div>
             </div>
         </div>
         
@@ -864,7 +908,7 @@
         <!-- Home Section -->
         <section id="home">
             <div class="hero-content">
-                <h1>AURA BATTLE</h1>
+                <h1><span>AURA</span> <span>BATTLE</span></h1>
                 <h2>THE ULTIMATE FREE FIRE TOURNAMENT PLATFORM</h2>
                 
                 <div class="stats-container">
@@ -887,7 +931,7 @@
                 </div>
                 
                 <div class="download-container">
-                    <button class="download-btn">
+                    <button class="download-btn" id="downloadButton">
                         Download Now
                         <span class="icon"><i class="fas fa-download"></i></span>
                         <span class="flare"></span>
@@ -897,69 +941,6 @@
             </div>
             
             <div class="scroll-down">Scroll Down</div>
-            
-            <div class="tournaments-section">
-                <h2 class="section-title">FEATURED TOURNAMENTS</h2>
-                
-                <div class="tournament-cards">
-                    <div class="tournament-card">
-                        <img src="https://via.placeholder.com/300x180" alt="Solo Tournament" class="tournament-image">
-                        <div class="tournament-details">
-                            <h3 class="tournament-type">SOLO BATTLE</h3>
-                            <div class="tournament-prize">₹500 Daily Prize Pool</div>
-                            <p class="tournament-info">Test your individual skills against the best Free Fire players. Winner takes all in this intense solo competition.</p>
-                            
-                            <div class="tournament-rules">
-                                <h4>Basic Rules:</h4>
-                                <ul>
-                                    <li>Single player only</li>
-                                    <li>Booyah determines winner</li>
-                                    <li>No teaming allowed</li>
-                                    <li>10 matches per day</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tournament-card">
-                        <img src="https://via.placeholder.com/300x180" alt="Squad Tournament" class="tournament-image">
-                        <div class="tournament-details">
-                            <h3 class="tournament-type">SQUAD WARS</h3>
-                            <div class="tournament-prize">₹5,000 Weekly Prize</div>
-                            <p class="tournament-info">Bring your squad and compete for glory. Teamwork and strategy will lead you to victory and cash rewards.</p>
-                            
-                            <div class="tournament-rules">
-                                <h4>Basic Rules:</h4>
-                                <ul>
-                                    <li>4-player teams</li>
-                                    <li>Points based on kills & placement</li>
-                                    <li>3 matches per day</li>
-                                    <li>No player substitutions</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tournament-card">
-                        <img src="https://via.placeholder.com/300x180" alt="Aura League" class="tournament-image">
-                        <div class="tournament-details">
-                            <h3 class="tournament-type">AURA LEAGUE</h3>
-                            <div class="tournament-prize">₹50,000 Monthly</div>
-                            <p class="tournament-info">The ultimate championship for elite players. Compete over a month-long season for massive cash prizes.</p>
-                            
-                            <div class="tournament-rules">
-                                <h4>Basic Rules:</h4>
-                                <ul>
-                                    <li>Invitation only</li>
-                                    <li>30-day season</li>
-                                    <li>Daily matches</li>
-                                    <li>Cumulative scoring</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- About Us Section -->
@@ -984,6 +965,70 @@
                         <li><i class="fas fa-check-circle"></i> Anti-cheat protection</li>
                         <li><i class="fas fa-check-circle"></i> Exciting game modes</li>
                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tournaments Section -->
+        <section class="tournaments-section">
+            <h2 class="section-title">FEATURED TOURNAMENTS</h2>
+            
+            <div class="tournament-cards">
+                <div class="tournament-card">
+                    <img src="https://via.placeholder.com/300x180" alt="Solo Tournament" class="tournament-image">
+                    <div class="tournament-details">
+                        <h3 class="tournament-type">SOLO BATTLE</h3>
+                        <div class="tournament-prize">₹500 Daily Prize Pool</div>
+                        <p class="tournament-info">Test your individual skills against the best Free Fire players. Winner takes all in this intense solo competition.</p>
+                        
+                        <div class="tournament-rules">
+                            <h4>Basic Rules:</h4>
+                            <ul>
+                                <li>Single player only</li>
+                                <li>Booyah determines winner</li>
+                                <li>No teaming allowed</li>
+                                <li>10 matches per day</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tournament-card">
+                    <img src="https://via.placeholder.com/300x180" alt="Squad Tournament" class="tournament-image">
+                    <div class="tournament-details">
+                        <h3 class="tournament-type">SQUAD WARS</h3>
+                        <div class="tournament-prize">₹5,000 Weekly Prize</div>
+                        <p class="tournament-info">Bring your squad and compete for glory. Teamwork and strategy will lead you to victory and cash rewards.</p>
+                        
+                        <div class="tournament-rules">
+                            <h4>Basic Rules:</h4>
+                            <ul>
+                                <li>4-player teams</li>
+                                <li>Points based on kills & placement</li>
+                                <li>3 matches per day</li>
+                                <li>No player substitutions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tournament-card">
+                    <img src="https://via.placeholder.com/300x180" alt="Aura League" class="tournament-image">
+                    <div class="tournament-details">
+                        <h3 class="tournament-type">AURA LEAGUE</h3>
+                        <div class="tournament-prize">₹50,000 Monthly</div>
+                        <p class="tournament-info">The ultimate championship for elite players. Compete over a month-long season for massive cash prizes.</p>
+                        
+                        <div class="tournament-rules">
+                            <h4>Basic Rules:</h4>
+                            <ul>
+                                <li>Invitation only</li>
+                                <li>30-day season</li>
+                                <li>Daily matches</li>
+                                <li>Cumulative scoring</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1148,17 +1193,25 @@
             const nav = document.querySelector('nav ul');
             
             mobileMenuBtn.addEventListener('click', function() {
-                nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+                nav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = nav.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
             
             // Close mobile menu when clicking on a link
             document.querySelectorAll('nav a').forEach(link => {
                 link.addEventListener('click', function() {
                     if (window.innerWidth <= 992) {
-                        nav.style.display = 'none';
+                        nav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                     }
                 });
             });
+            
+            // Show hero content after delay
+            setTimeout(() => {
+                document.querySelector('.hero-content').classList.add('visible');
+            }, 2000);
             
             // Animated Counter for Stats
             function animateValue(id, start, end, duration) {
@@ -1168,9 +1221,9 @@
                     if (!startTimestamp) startTimestamp = timestamp;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     if (id === 'prizeCount') {
-                        obj.innerHTML = '₹' + Math.floor(progress * (end - start) + start;
+                        obj.innerHTML = '₹' + Math.floor(progress * (end - start) + start).toLocaleString();
                     } else {
-                        obj.innerHTML = Math.floor(progress * (end - start) + start;
+                        obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
                     }
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
@@ -1183,10 +1236,10 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        animateValue('prizeCount', 0, 25000, 2000);
+                        animateValue('prizeCount', 0, 85000, 2000);
                         animateValue('playerCount', 0, 12500, 2000);
-                        animateValue('tournamentCount', 0, 42, 1500);
-                        animateValue('winnerCount', 0, 380, 1500);
+                        animateValue('tournamentCount', 0, 142, 1500);
+                        animateValue('winnerCount', 0, 5380, 1500);
                         observer.unobserve(entry.target);
                     }
                 });
@@ -1205,17 +1258,34 @@
                 });
             });
             
+            // Scroll down button functionality
+            document.querySelector('.scroll-down').addEventListener('click', function() {
+                document.querySelector('#about').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+            
             // Auto-play video
             const bgVideo = document.getElementById('bgVideo');
             bgVideo.muted = true;
             bgVideo.play().catch(e => console.log('Video autoplay prevented:', e));
             
+            // Download button functionality
+            document.getElementById('downloadButton').addEventListener('click', function() {
+                // Create a temporary anchor element to trigger download
+                const link = document.createElement('a');
+                link.href = 'AuraBattle.apk';
+                link.download = 'AuraBattle.apk';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+            
             // Responsive nav adjustment
             function handleResize() {
                 if (window.innerWidth > 992) {
-                    nav.style.display = 'flex';
-                } else {
-                    nav.style.display = 'none';
+                    nav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             }
             
