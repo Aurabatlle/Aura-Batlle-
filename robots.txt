@@ -1,24 +1,46 @@
-# Aura Battle - Free Fire Tournaments
-# Updated: June 2024 (Valid through 2025)
+# Aura Battle - Free Fire MAX Tournaments
+# robots.txt v2025.1 (Valid until Dec 2025)
+# Generated: June 2024
+
 User-agent: *
 Allow: /
-Disallow: /private/
 Disallow: /admin/
+Disallow: /private/
 Disallow: /tmp/
+Crawl-delay: 3
 
-# Sitemap Configuration (2025)
+# Sitemaps (2025)
 Sitemap: https://aurabattle.netlify.app/sitemap.xml
 Sitemap: https://aurabattle.netlify.app/social-sitemap.xml
 
-# Crawl Delay for Tournament Pages
-Crawl-delay: 5
+# Social Media & Support URLs (2025 Whitelist)
+Allow: /tournaments/
+Allow: /images/social/
 
-# Social Media Verification
-User-agent: Twitterbot
-Allow: /
+# External Service Rules
+User-agent: ChatGPT-User
+Disallow: /
 
 User-agent: WhatsAppBot
 Allow: /tournaments/
+Allow: /support/
+Disallow: /private/
 
 User-agent: MetaInspector
-Allow: /images/
+Allow: /images/og/
+Disallow: /images/private/
+
+# Search Engine Specific
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Crawl-delay: 5
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Host: aurabattle.netlify.app
+
+# Legacy Systems (2025 Deprecation)
+User-agent: MJ12bot
+Disallow: /
