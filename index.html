@@ -7,30 +7,28 @@
     <meta name="keywords" content="aura battle, free fire tournament app, earn money playing free fire, free fire max competitions, withdraw upi from gaming, clash squad cash prizes, solo vs squad rewards, ff esports apk, instant withdrawal tournament app, play free fire earn paytm, battle royale rewards app, refer friends earn money, free fire gift card prizes">
     <meta name="author" content="Aura Battle">
     <meta name="google-site-verification" content="vc9q9pIcOAtZVPo0_lO88D2KSocZHwjjK0fsCRimX7M">
-    <title>Aura Battle Esports & Gaming </title>
+    <title>Aura Battle Esports & Gaming</title>
  
     <link rel="icon" href="unnamed.png" type="image/x-icon">
-
-<!-- For .png format -->
-<link rel="icon" href="unnamed.png" type="image/png">
+    <link rel="icon" href="unnamed.png" type="image/png">
     
     <!-- WhatsApp/Social Media Share Card -->
-<meta property="og:site_name" content="Aura Battle">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://aurabattle.netlify.app/">
-<meta property="og:title" content="🏆 Aura Battle - Free Fire MAX Tournaments">
-<meta property="og:description" content="🔥 Compete & Win Real Cash Prizes! Join daily Free Fire MAX tournaments with instant withdrawals. Register now!">
-<meta property="og:image" content="https://aurabattle.netlify.app/images/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Aura Battle Tournament Platform">
+    <meta property="og:site_name" content="Aura Battle">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aurabattle.netlify.app/">
+    <meta property="og:title" content="🏆 Aura Battle - Free Fire MAX Tournaments">
+    <meta property="og:description" content="🔥 Compete & Win Real Cash Prizes! Join daily Free Fire MAX tournaments with instant withdrawals. Register now!">
+    <meta property="og:image" content="https://aurabattle.netlify.app/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Aura Battle Tournament Platform">
 
-<!-- WhatsApp Specific -->
-<meta property="og:image:type" content="image/jpeg">
-<meta name="twitter:card" content="summary_large_image">
+    <!-- WhatsApp Specific -->
+    <meta property="og:image:type" content="image/jpeg">
+    <meta name="twitter:card" content="summary_large_image">
 
-<!-- Fallback for older apps -->
-<meta name="description" content="Free Fire MAX tournaments with real cash prizes. Play now and win!">
+    <!-- Fallback for older apps -->
+    <meta name="description" content="Free Fire MAX tournaments with real cash prizes. Play now and win!">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Oxanium:wght@600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -249,89 +247,46 @@
             opacity: 0.9;
         }
         
- .stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Reduced from 40px */
-    margin: 30px 0; /* Reduced from 50px */
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 0 5%;
-    position: relative; /* Changed from absolute */
-    bottom: auto; /* Remove absolute positioning */
-}
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 0 5%;
+            position: relative;
+            bottom: auto;
+        }
 
-.stat-box {
-    background: rgba(26, 26, 26, 0.8);
-    border-radius: 10px;
-    padding: 15px 20px; /* Reduced from 20px 30px */
-    min-width: 120px; /* Reduced from 180px */
-    width: calc(50% - 20px); /* Added for better mobile layout */
-    max-width: 180px; /* Maximum width */
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 0, 0, 0.3);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box; /* Added for proper sizing */
-}
+        .stat-box {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 10px;
+            padding: 15px 20px;
+            min-width: 120px;
+            width: calc(50% - 20px);
+            max-width: 180px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+        }
 
-.stat-number {
-    font-family: 'Oxanium', sans-serif;
-    font-size: 1.8rem; /* Reduced from 2.5rem */
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
+        .stat-number {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
 
-.stat-label {
-    font-size: 0.8rem; /* Reduced from 0.9rem */
-    color: var(--light);
-    opacity: 0.8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Responsive adjustments */
-@media (min-width: 576px) {
-    .stat-box {
-        width: auto; /* Reset width */
-        min-width: 140px; /* Slightly larger on tablets */
-    }
-    .stat-number {
-        font-size: 2rem; /* Slightly larger on tablets */
-    }
-}
-
-@media (min-width: 768px) {
-    .stats-container {
-        gap: 25px; /* More space on larger screens */
-    }
-    .stat-box {
-        min-width: 160px; /* Larger on desktops */
-        padding: 20px 25px;
-    }
-    .stat-number {
-        font-size: 2.3rem; /* Larger on desktops */
-    }
-    .stat-label {
-        font-size: 0.85rem;
-    }
-}
-
-@media (min-width: 992px) {
-    .stats-container {
-        gap: 40px; /* Original gap on large screens */
-    }
-    .stat-box {
-        min-width: 180px; /* Original size on large screens */
-        padding: 20px 30px; /* Original padding */
-    }
-    .stat-number {
-        font-size: 2.5rem; /* Original size */
-    }
-    .stat-label {
-        font-size: 0.9rem; /* Original size */
-    }
-}
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--light);
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
         
         /* Download Button */
         .download-container {
@@ -971,6 +926,7 @@
     <div class="video-background">
         <video autoplay muted loop id="bgVideo">
             <source src="background-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     </div>
 
@@ -1084,7 +1040,6 @@
                             <h4>Basic Rules:</h4>
                             <ul>
                                 <li>Single player only</li>
-                              
                                 <li>No teaming allowed</li>
                                 <li>10 matches per day</li>
                             </ul>
@@ -1168,10 +1123,9 @@
             <div class="social-media">
                 <h3>Follow Us</h3>
                 <div class="social-icons">
-                    
                     <a href="https://www.instagram.com/aura_battle.app?igsh=MWhxcDNieWFsMXk5OQ==" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://youtube.com/@aurabattle-i1s?si=URMoOu6cfkfb8qxe" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
-                  <a href="https://whatsapp.com/channel/0029Vb6d7Ig9cDDb3Vde6I3F" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://whatsapp.com/channel/0029Vb6d7Ig9cDDb3Vde6I3F" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </section>
