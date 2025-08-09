@@ -1,47 +1,26 @@
-# Aura Battle - Free Fire MAX Tournaments
-# robots.txt v2025.2 (Google/Bing/Yandex compliant)
-# Last Updated: June 2024
-
-### Global Rules ###
+# Aura Battle - Basic Robots.txt
+# Guaranteed valid syntax
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
 Disallow: /tmp/
-Disallow: /api/
-Request-rate: 1/3  # 1 request every 3 seconds (for non-Google bots)
 
-### Search Engine Specific ###
-User-agent: Googlebot
-Allow: /tournaments/
-Allow: /leaderboard/
-Disallow: /admin/
-Disallow: /user-data/
-# Note: Google ignores Crawl-delay - set in Search Console instead
-
-User-agent: Bingbot
-Allow: /
-Host: aurabattle.netlify.app
+# Standard crawl delay (works on Bing/Yandex)
+User-agent: *
 Crawl-delay: 5
 
-### Social/Special Bots ###
-User-agent: WhatsAppBot
+# Googlebot specific rules
+User-agent: Googlebot
 Allow: /tournaments/
-Disallow: /private/
+Disallow: /user-data/
+
+# Social media bots
+User-agent: FacebookBot
+Disallow: 
 
 User-agent: Twitterbot
-Allow: /images/social/
+Disallow:
 
-User-agent: MetaInspector
-Allow: /images/og/
-
-### Sitemaps ###
+# Sitemap location
 Sitemap: https://aurabattle.netlify.app/sitemap.xml
-Sitemap: https://aurabattle.netlify.app/social-sitemap.xml
-
-### Legacy Blocking ###
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: AhrefsBot
-Disallow: /
