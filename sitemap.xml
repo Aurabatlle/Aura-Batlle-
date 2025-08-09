@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aurabattle.netlify.app/</loc></url>
-  <url><loc>https://aurabattle.netlify.app/about-us</loc></url>
-  <!-- Add other pages here -->
+  
+  <!-- Main Site (Updated quarterly) -->
+  <url>
+    <loc>https://aurabattle.netlify.app/</loc>
+    <lastmod>2025-03-15</lastmod>  <!-- Next planned update -->
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Support Systems (Updated biannually) -->
+  <url>
+    <loc>https://aurabattle-helps.10001mb.com/?i=1</loc>
+    <lastmod>2025-06-01</lastmod>  <!-- Mid-year review -->
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Social Profiles (Updated monthly) -->
+  <url>
+    <loc>https://www.instagram.com/aura_battle.app</loc>
+    <lastmod>2025-01-10</lastmod>  <!-- Recent post -->
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://youtube.com/@aurabattle-i1s</loc>
+    <lastmod>2025-01-05</lastmod>  <!-- Latest upload -->
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>
