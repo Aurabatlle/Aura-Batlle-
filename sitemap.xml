@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://aurabatlle.netlify.app/</loc>
-    <lastmod>2025-08-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <!-- Add additional pages here -->
-  <!-- Example:
-  <url>
-    <loc>https://aurabatlle.netlify.app/tournaments</loc>
-    <lastmod>2025-08-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aurabattle.netlify.app/</loc></url>
+  <url><loc>https://aurabattle.netlify.app/about-us</loc></url>
+  <!-- Add other pages here -->
 </urlset>
