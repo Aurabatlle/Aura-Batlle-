@@ -1,0 +1,38 @@
+{
+  "name": "Aura Battle",
+  "short_name": "AuraBattle",
+  "description": "Free Fire MAX tournaments with real cash prizes",
+  "icons": [
+    {
+      "src": "unnamed.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "unnamed.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#FF0000",
+  "background_color": "#0A0A0A",
+  "orientation": "portrait-primary",
+  "categories": ["games", "entertainment"],
+  "screenshots": [
+    {
+      "src": "https://aurabattle.netlify.app/images/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://aurabattle.netlify.app"
+    }
+  ]
+}
