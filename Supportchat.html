@@ -1,38 +1,535 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Support Chat</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        #tawk_69bea5ec6e8f601c36d1d0cd {
-            height: 100vh;
-            width: 100%;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Battle — Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #100a0a;
+    --card: #160c0c;
+    --border: rgba(220, 38, 38, 0.2);
+    --glow: #dc2626;
+    --accent: #f87171;
+    --gold: #fbbf24;
+    --text: #f5e8e8;
+    --muted: #8a6a6a;
+    --green: #3dffb0;
+    --red: #ff4d6d;
+    --radius: 16px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(220,38,38,0.13) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(248,113,113,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 50% 50%, rgba(180,20,20,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(220,38,38,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(220,38,38,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 0 32px;
+  }
+
+  .back-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--accent);
+    transition: all 0.2s;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .back-btn:hover {
+    background: rgba(220,38,38,0.15);
+    border-color: var(--glow);
+    box-shadow: 0 0 14px rgba(220,38,38,0.3);
+  }
+  .back-btn svg { width: 18px; height: 18px; }
+
+  .header-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+  .header-title span {
+    background: linear-gradient(135deg, var(--glow), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* User ID pill */
+  .uid-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeSlideIn 0.4s ease both;
+  }
+  .uid-icon {
+    width: 34px; height: 34px;
+    background: linear-gradient(135deg, var(--glow), var(--accent));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .uid-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .uid-value { font-family: 'Orbitron', sans-serif; font-size: 0.82rem; color: var(--gold); letter-spacing: 0.06em; }
+  .uid-input-wrap { flex: 1; }
+
+  .uid-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--gold);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.82rem;
+    width: 100%;
+    letter-spacing: 0.06em;
+  }
+  .uid-input::placeholder { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.04em; font-family: 'Rajdhani', sans-serif; }
+
+  /* Section heading */
+  .section-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-left: 2px;
+  }
+
+  /* Option cards */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .option-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 22px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+    animation: fadeSlideIn 0.4s ease both;
+  }
+  .option-card:nth-child(2) { animation-delay: 0.07s; }
+
+  .option-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: inherit;
+  }
+  .option-card.live::before { background: linear-gradient(135deg, rgba(220,38,38,0.1), transparent 60%); }
+  .option-card.ticket::before { background: linear-gradient(135deg, rgba(220,38,38,0.08), transparent 60%); }
+
+  .option-card:hover { transform: translateY(-2px); }
+  .option-card.live:hover { border-color: rgba(220,38,38,0.5); box-shadow: 0 8px 28px rgba(220,38,38,0.18); }
+  .option-card.ticket:hover { border-color: rgba(248,113,113,0.4); box-shadow: 0 8px 28px rgba(220,38,38,0.15); }
+  .option-card:hover::before { opacity: 1; }
+
+  .option-card.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .card-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 22px;
+  }
+  .live .card-icon { background: rgba(220,38,38,0.13); border: 1px solid rgba(220,38,38,0.3); }
+  .ticket .card-icon { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25); }
+
+  .card-info { flex: 1; }
+  .card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .live .card-title { color: var(--accent); }
+  .ticket .card-title { color: #fca5a5; }
+
+  .card-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+
+  .card-arrow {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: transform 0.2s;
+  }
+  .live .card-arrow { background: rgba(220,38,38,0.12); color: var(--accent); }
+  .ticket .card-arrow { background: rgba(248,113,113,0.1); color: #fca5a5; }
+  .option-card:hover .card-arrow { transform: translateX(3px); }
+
+  .card-meta {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+  }
+
+  /* Status badge */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .status-badge.online { background: rgba(220,38,38,0.15); color: #f87171; border: 1px solid rgba(220,38,38,0.35); }
+  .status-badge.offline { background: rgba(100,20,20,0.2); color: #a87070; border: 1px solid rgba(120,40,40,0.3); }
+  .status-badge.always { background: rgba(220,38,38,0.1); color: var(--accent); border: 1px solid rgba(220,38,38,0.25); }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot.green { background: #f87171; box-shadow: 0 0 6px #dc2626; animation: pulse 2s infinite; }
+  .dot.red { background: #7a3030; }
+  .dot.purple { background: var(--accent); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .meta-text { color: var(--muted); }
+
+  /* Info section */
+  .info-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 0;
+    animation: fadeSlideIn 0.4s 0.14s ease both;
+  }
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-emoji { font-size: 16px; width: 24px; text-align: center; }
+  .info-text { font-size: 0.85rem; color: var(--muted); }
+  .info-text strong { color: var(--text); font-weight: 600; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 0.84rem;
+    color: var(--text);
+    z-index: 1000;
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    white-space: nowrap;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 <body>
+<div class="grid-overlay"></div>
 
-<div id='tawk_69bea5ec6e8f601c36d1d0cd'></div>
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <a class="back-btn" href="javascript:history.back()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </a>
+    <div>
+      <div class="header-title"><span>Aura Battle</span> Support</div>
+    </div>
+  </div>
 
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-Tawk_API.embedded='tawk_69bea5ec6e8f601c36d1d0cd';
+  <!-- User ID Bar -->
+  <div class="uid-bar">
+    <div class="uid-icon">🎮</div>
+    <div class="uid-input-wrap">
+      <div class="uid-label">Your Player ID</div>
+      <input class="uid-input" id="userIdInput" type="text" placeholder="Enter your User ID (optional)" maxlength="64" autocomplete="off" spellcheck="false"/>
+    </div>
+  </div>
 
+  <!-- Options -->
+  <div class="section-label">Choose Support Type</div>
+  <div class="options">
+
+    <!-- Live Chat -->
+    <div class="option-card live" id="liveChatCard" onclick="openLiveChat()">
+      <div class="card-top">
+        <div class="card-icon">💬</div>
+        <div class="card-info">
+          <div class="card-title">Live Chat</div>
+          <div class="card-desc">Connect with our team in real-time. Fast answers for urgent issues.</div>
+        </div>
+        <div class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="status-badge" id="chatStatusBadge">
+          <span class="dot" id="chatDot"></span>
+          <span id="chatStatusText"></span>
+        </span>
+        <span class="meta-text" id="chatMetaText"></span>
+      </div>
+    </div>
+
+    <!-- Raise Ticket -->
+    <div class="option-card ticket" id="ticketCard" onclick="openTicket()">
+      <div class="card-top">
+        <div class="card-icon">🎫</div>
+        <div class="card-info">
+          <div class="card-title">Raise a Ticket</div>
+          <div class="card-desc">Submit a detailed report. We'll respond within 12–24 hours.</div>
+        </div>
+        <div class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="status-badge always">
+          <span class="dot purple"></span>
+          Always Open
+        </span>
+        <span class="meta-text">Reply within 12–24 hrs</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Info box -->
+  <div class="info-box">
+    <div class="info-row">
+      <span class="info-emoji">🕐</span>
+      <span class="info-text"><strong>Chat Hours:</strong> Mon–Sat, 11:00 AM – 4:00 PM (IST)</span>
+    </div>
+    <div class="info-row">
+      <span class="info-emoji">🎫</span>
+      <span class="info-text"><strong>Tickets:</strong> Available 24/7 — reply in 12–24 hours</span>
+    </div>
+    <div class="info-row">
+      <span class="info-emoji">⚡</span>
+      <span class="info-text">Include your <strong>Player ID</strong> for faster resolution</span>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Tawk.to -->
+<script>
+// Obfuscated config
 (function(){
-var s1=document.createElement("script"),
-    s0=document.getElementsByTagName("script")[0];
+  var _cfg = atob('eyJwcm9wZXJ0eUlkIjoiNjliZWE1ZWM2ZThmNjAxYzM2ZDFkMGNkIiwid2lkZ2V0SWQiOiIxams4Ymc5YmYiLCJhcGlLZXkiOiIwZTc5NTUyMWU1YmU2MTA5MWExOWExMThiMjgwODc2ZDY3ODQ4ODdhIn0=');
+  window.__aura_cfg = JSON.parse(_cfg);
+})();
 
-s1.async=true;
-s1.src='https://embed.tawk.to/69bea5ec6e8f601c36d1d0cd/1jk8cilqn';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
+// Tawk.to load
+var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+(function(){
+  var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+  s1.async = true;
+  s1.src = 'https://embed.tawk.to/' + window.__aura_cfg.propertyId + '/' + window.__aura_cfg.widgetId;
+  s1.charset = 'UTF-8';
+  s1.setAttribute('crossorigin', '*');
+  s0.parentNode.insertBefore(s1, s0);
+})();
 
-s0.parentNode.insertBefore(s1,s0);
+// ── Availability Logic ──────────────────────────────────────────────
+function isChatAvailable() {
+  var now = new Date();
+  // Convert to IST (UTC+5:30)
+  var utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  var ist = new Date(utc + (5.5 * 3600000));
+  var day = ist.getDay(); // 0=Sun, 1=Mon…6=Sat
+  var hr  = ist.getHours();
+  var min = ist.getMinutes();
+  var totalMins = hr * 60 + min;
+  // Mon–Sat (1–6), 11:00–16:00 IST
+  return (day >= 1 && day <= 6) && (totalMins >= 660 && totalMins < 960);
+}
+
+function updateChatStatus() {
+  var badge   = document.getElementById('chatStatusBadge');
+  var dot     = document.getElementById('chatDot');
+  var statusT = document.getElementById('chatStatusText');
+  var metaT   = document.getElementById('chatMetaText');
+  var card    = document.getElementById('liveChatCard');
+
+  if (isChatAvailable()) {
+    badge.className = 'status-badge online';
+    dot.className   = 'dot green';
+    statusT.textContent = 'Online Now';
+    metaT.textContent   = 'Mon–Sat · 11 AM – 4 PM';
+    card.classList.remove('disabled');
+  } else {
+    badge.className = 'status-badge offline';
+    dot.className   = 'dot red';
+    statusT.textContent = 'Offline';
+    metaT.textContent   = 'Available Mon–Sat, 11 AM–4 PM';
+    card.classList.add('disabled');
+  }
+}
+updateChatStatus();
+setInterval(updateChatStatus, 60000);
+
+// ── Helpers ─────────────────────────────────────────────────────────
+function getUserId() {
+  return document.getElementById('userIdInput').value.trim();
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+function setTawkVisitorInfo() {
+  var uid = getUserId();
+  if (!uid) return;
+  try {
+    Tawk_API.setAttributes({
+      name:  'Player ' + uid,
+      email: uid + '@aurabattle.player',
+      'Player-ID': uid
+    }, function(err){});
+  } catch(e){}
+}
+
+// ── Actions ──────────────────────────────────────────────────────────
+function openLiveChat() {
+  if (!isChatAvailable()) {
+    showToast('⏰ Chat is offline · Available Mon–Sat 11AM–4PM');
+    return;
+  }
+  setTawkVisitorInfo();
+  try {
+    Tawk_API.maximize();
+  } catch(e) {
+    showToast('Loading chat widget…');
+  }
+}
+
+function openTicket() {
+  var uid = getUserId();
+  var subject = encodeURIComponent('Aura Battle Support Request');
+  var body    = encodeURIComponent('My Player ID: ' + (uid || '[enter your player ID]') + '\n\nDescribe your issue below:\n\n');
+  var email   = atob('dGlja2V0c0BhdXJhLWJhdHRsZS5wLnRhd2suZW1haWw='); // tickets@aura-battle.p.tawk.email
+  window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+}
+
+// Pre-fill from URL param e.g. support.html?uid=ABC123
+(function(){
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var uid = params.get('uid') || params.get('userId') || params.get('user_id');
+    if (uid) document.getElementById('userIdInput').value = uid;
+  } catch(e){}
 })();
 </script>
-
 </body>
 </html>
