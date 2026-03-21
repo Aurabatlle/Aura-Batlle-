@@ -438,6 +438,37 @@ var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
   s0.parentNode.insertBefore(s1, s0);
 })();
 
+// ── Pre-fill from URL param FIRST so uid is ready before Tawk loads ──
+(function(){
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var uid = params.get('uid') || params.get('userId') || params.get('user_id');
+    if (uid) document.getElementById('userIdInput').value = uid;
+  } catch(e){}
+})();
+
+// ── Tawk.to: push visitor info as soon as widget is ready ────────────
+// onLoad fires once the widget iframe is fully initialised.
+// onChatStarted fires each time a new chat begins — catches late logins.
+Tawk_API.onLoad = function() {
+  pushVisitorInfo();
+};
+Tawk_API.onChatStarted = function() {
+  pushVisitorInfo();
+};
+
+function pushVisitorInfo() {
+  var uid = getUserId();
+  if (!uid) return;
+  try {
+    Tawk_API.setAttributes({
+      name:       'Player ' + uid,
+      email:      uid + '@aurabattle.app',
+      'Player-ID': uid
+    }, function(err){ if(err) console.warn('Tawk setAttributes:', err); });
+  } catch(e){ console.warn('Tawk not ready:', e); }
+}
+
 // ── Availability Logic ──────────────────────────────────────────────
 function isChatAvailable() {
   var now = new Date();
@@ -488,31 +519,25 @@ function showToast(msg) {
   setTimeout(function(){ t.classList.remove('show'); }, 3000);
 }
 
-function setTawkVisitorInfo() {
-  var uid = getUserId();
-  if (!uid) return;
-  try {
-    Tawk_API.setAttributes({
-      name:  'Player ' + uid,
-      email: uid + '@aurabattle.player',
-      'Player-ID': uid
-    }, function(err){});
-  } catch(e){}
-}
-
 // ── Actions ──────────────────────────────────────────────────────────
 function openLiveChat() {
   if (!isChatAvailable()) {
     showToast('⏰ Chat is offline · Available Mon–Sat 11AM–4PM');
     return;
   }
-  setTawkVisitorInfo();
+  // Push latest uid (user may have typed it after page load)
+  pushVisitorInfo();
   try {
     Tawk_API.maximize();
   } catch(e) {
     showToast('Loading chat widget…');
   }
 }
+
+// Re-push whenever the user changes their ID in the input
+document.getElementById('userIdInput').addEventListener('change', function() {
+  pushVisitorInfo();
+});
 
 function openTicket() {
   var uid = getUserId();
@@ -522,14 +547,7 @@ function openTicket() {
   window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
 }
 
-// Pre-fill from URL param e.g. support.html?uid=ABC123
-(function(){
-  try {
-    var params = new URLSearchParams(window.location.search);
-    var uid = params.get('uid') || params.get('userId') || params.get('user_id');
-    if (uid) document.getElementById('userIdInput').value = uid;
-  } catch(e){}
-})();
+
 </script>
 </body>
 </html>
