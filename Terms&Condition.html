@@ -77,19 +77,6 @@
             align-items: center;
         }
         
-        /* Show Flat_normal.jpg instead of aura battle text */
-        .header-logo-img {
-            height: 55px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.3));
-        }
-        
-        /* Hide old logo text */
-        .logo-text {
-            display: none;
-        }
-        
         /* Navigation */
         nav ul {
             display: flex;
@@ -258,7 +245,7 @@
             letter-spacing: 1px;
         }
         
-        /* Download Button - will show after 1 second via JS */
+        /* Download Button - will show after 0.5 second via JS */
         .download-container {
             position: relative;
             margin: 40px 0;
@@ -552,7 +539,7 @@
             left: 0;
         }
         
-        /* Contact Section */
+        /* Contact Section - Support option removed */
         #contact {
             background: var(--dark-bg);
         }
@@ -653,72 +640,62 @@
             transform: translateY(-5px);
         }
         
-        /* Terms Section */
+        /* Terms Section - Now just redirect button, no content */
         #terms {
             background: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
         }
         
-        .terms-content {
-            max-width: 800px;
+        .terms-redirect-card {
+            max-width: 600px;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
             border: 1px solid rgba(255, 0, 0, 0.3);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
-        .terms-section {
-            margin-bottom: 30px;
+        .terms-redirect-card i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
         
-        .terms-section h3 {
+        .terms-redirect-card h3 {
             font-family: 'Oxanium', sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 20px;
         }
         
-        .terms-section ul {
-            list-style: none;
-        }
-        
-        .terms-section li {
-            margin-bottom: 10px;
+        .terms-redirect-card p {
             color: rgba(255, 255, 255, 0.8);
-            position: relative;
-            padding-left: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
         
-        .terms-section li::before {
-            content: '▹';
-            color: var(--primary);
-            position: absolute;
-            left: 0;
-        }
-        
-        .view-full-terms {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .terms-full-btn {
+        .terms-redirect-btn {
             display: inline-block;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 12px 30px;
-            border-radius: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
         }
         
-        .terms-full-btn:hover {
-            background: var(--primary);
-            color: white;
+        .terms-redirect-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
         }
         
         /* Game Rules Section */
@@ -869,12 +846,17 @@
                 font-size: 2rem;
             }
             
-            .about-content, .terms-content, .rules-container {
+            .about-content, .rules-container {
                 padding: 30px;
             }
             
-            .header-logo-img {
-                height: 45px;
+            .terms-redirect-card {
+                padding: 40px 25px;
+                margin: 0 20px;
+            }
+            
+            .terms-redirect-card h3 {
+                font-size: 1.6rem;
             }
         }
         
@@ -904,7 +886,7 @@
                 width: 100%;
             }
             
-            .about-content, .terms-content, .rules-container {
+            .about-content, .rules-container {
                 padding: 20px;
             }
             
@@ -917,8 +899,16 @@
                 padding: 10px 15px;
             }
             
-            .header-logo-img {
-                height: 40px;
+            .terms-redirect-card {
+                padding: 30px 20px;
+            }
+            
+            .terms-redirect-card i {
+                font-size: 3rem;
+            }
+            
+            .terms-redirect-card h3 {
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -932,27 +922,27 @@
         </video>
     </div>
 
-    
-<!-- Header -->
-<header>
-    <div class="logo-container">
-        <img src="Flat_normal.jpg" alt="Aura Battle Logo" style="height:50px;object-fit:contain;max-width:220px;">
-    </div>
-    
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-            <li><a href="#terms">Terms</a></li>
-            <li><a href="#rules">Game Rules</a></li>
-        </ul>
-    </nav>
-    
-    <div class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-    </div>
-</header>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="Flat_normal.jpg" alt="Aura Battle Logo" style="height:50px;object-fit:contain;max-width:220px;">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#terms">Terms</a></li>
+                <li><a href="#rules">Game Rules</a></li>
+            </ul>
+        </nav>
+        
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
     <!-- Main Content -->
     <main>
         <!-- Home Section -->
@@ -1117,46 +1107,13 @@
             </div>
         </section>
 
-        <!-- Terms Section - Updated with redirect to Terms&Condition.html -->
+        <!-- Terms Section - Redirects to Terms&Condition.html (no content displayed) -->
         <section id="terms">
-            <h2 class="section-title">TERMS & CONDITIONS</h2>
-            
-            <div class="terms-content">
-                <div class="terms-section">
-                    <h3>Participation Terms</h3>
-                    <ul>
-                        <li>Players must be at least 18 years old or have parental consent to participate in cash tournaments.</li>
-                        <li>All participants must register with valid information and maintain one account only.</li>
-                        <li>Any form of cheating, hacking, or unfair advantage will result in permanent ban.</li>
-                        <li>Tournament prizes are subject to taxation as per government regulations.</li>
-                        <li>Aura Battle reserves the right to modify tournament rules and prizes without prior notice.</li>
-                    </ul>
-                </div>
-                
-                <div class="terms-section">
-                    <h3>Payment Terms</h3>
-                    <ul>
-                        <li>All tournament entry fees are non-refundable once the tournament has started.</li>
-                        <li>Prize money will be transferred within 48 hours of tournament completion.</li>
-                        <li>Players are responsible for providing correct payment details for prize distribution.</li>
-                        <li>Aura Battle is not responsible for any bank charges or transfer fees.</li>
-                        <li>Minimum withdrawal amount is ₹100 for all payment methods.</li>
-                    </ul>
-                </div>
-                
-                <div class="terms-section">
-                    <h3>Account Security</h3>
-                    <ul>
-                        <li>Players are responsible for maintaining the security of their account credentials.</li>
-                        <li>Sharing accounts is strictly prohibited and may result in permanent ban.</li>
-                        <li>Aura Battle will never ask for your password via email or chat.</li>
-                        <li>Report any suspicious activity on your account immediately to our support team.</li>
-                    </ul>
-                </div>
-                
-                <div class="view-full-terms">
-                    <a href="Terms&Condition.html" class="terms-full-btn">View Full Terms & Conditions →</a>
-                </div>
+            <div class="terms-redirect-card">
+                <i class="fas fa-file-contract"></i>
+                <h3>Terms & Conditions</h3>
+                <p>Read our complete terms and conditions to understand the rules, policies, and guidelines for participating in Aura Battle tournaments and using our platform.</p>
+                <a href="Terms&Condition.html" class="terms-redirect-btn">View Full Terms & Conditions →</a>
             </div>
         </section>
 
@@ -1211,7 +1168,7 @@
         </section>
     </main>
 
-    <!-- Footer - removed support option from footer links -->
+    <!-- Footer - removed support option -->
     <footer>
         <div class="footer-logo">AURA BATTLE</div>
         
@@ -1253,19 +1210,15 @@
             // Show elements after delay - Hero heading appears after 2s
             setTimeout(() => {
                 document.querySelector('.hero-heading').classList.add('visible');
-                document.querySelector('.logo-text .play-win').style.opacity = '1';
-                document.querySelector('.logo-text .play-win').style.transform = 'translateY(0)';
-                document.querySelector('.logo-text .aura-battle').style.opacity = '1';
-                document.querySelector('.logo-text .aura-battle').style.transform = 'translateY(0)';
             }, 2000);
             
-            // SHOW DOWNLOAD BUTTON AFTER 1 SECOND (NEW REQUIREMENT)
+            // SHOW DOWNLOAD BUTTON AFTER 0.5 SECOND (updated)
             setTimeout(() => {
                 const downloadContainer = document.getElementById('downloadContainer');
                 if (downloadContainer) {
                     downloadContainer.classList.add('visible');
                 }
-            }, 1000);
+            }, 500);
             
             // Animated Counter for Stats
             function animateValue(id, start, end, duration) {
@@ -1291,7 +1244,7 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        animateValue('prizeCount', 0, 85000, 2000);
+                        animateValue('prizeCount', 0, 8000, 2000);
                         animateValue('playerCount', 0, 12500, 2000);
                         animateValue('tournamentCount', 0, 142, 1500);
                         animateValue('winnerCount', 0, 5380, 1500);
