@@ -324,6 +324,19 @@
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+
+  /* Hide Tawk.to default bottom corner widget bubble */
+  #tawkchat-container,
+  .tawk-min-container,
+  .tawk-button-container,
+  [id^="tawkchat"],
+  iframe[src*="tawk.to"],
+  div[style*="tawk"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 </style>
 </head>
 <body>
@@ -361,7 +374,7 @@
         <div class="card-icon">💬</div>
         <div class="card-info">
           <div class="card-title">Live Chat</div>
-          <div class="card-desc">Connect with our team in real-time. Fast answers for urgent issues.</div>
+          <div class="card-desc">Connect with our team in real-time. Available every day 11AM–4PM IST.</div>
         </div>
         <div class="card-arrow">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
@@ -403,7 +416,7 @@
   <div class="info-box">
     <div class="info-row">
       <span class="info-emoji">🕐</span>
-      <span class="info-text"><strong>Chat Hours:</strong> Mon–Sat, 11:00 AM – 4:00 PM (IST)</span>
+      <span class="info-text"><strong>Chat Hours:</strong> Every Day, 11:00 AM – 4:00 PM (IST)</span>
     </div>
     <div class="info-row">
       <span class="info-emoji">🎫</span>
@@ -448,24 +461,29 @@ var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
 })();
 
 // ── Tawk.to: push visitor info as soon as widget is ready ────────────
-// onLoad fires once the widget iframe is fully initialised.
-// onChatStarted fires each time a new chat begins — catches late logins.
 Tawk_API.onLoad = function() {
   pushVisitorInfo();
 };
 Tawk_API.onChatStarted = function() {
   pushVisitorInfo();
 };
+Tawk_API.onStatusChange = function() {
+  pushVisitorInfo();
+};
 
 function pushVisitorInfo() {
   var uid = getUserId();
-  if (!uid) return;
+  // Always send attributes — even if uid is empty, so admin sees "no ID entered"
+  var displayName = uid ? 'Player ' + uid : 'Unknown Player';
+  var displayEmail = uid ? uid + '@aurabattle.app' : 'no-id@aurabattle.app';
   try {
-    Tawk_API.setAttributes({
-      name:       'Player ' + uid,
-      email:      uid + '@aurabattle.app',
-      'Player-ID': uid
-    }, function(err){ if(err) console.warn('Tawk setAttributes:', err); });
+    if (typeof Tawk_API !== 'undefined' && typeof Tawk_API.setAttributes === 'function') {
+      Tawk_API.setAttributes({
+        name:        displayName,
+        email:       displayEmail,
+        'Player-ID': uid || 'Not provided'
+      }, function(err){ if(err) console.warn('Tawk setAttributes:', err); });
+    }
   } catch(e){ console.warn('Tawk not ready:', e); }
 }
 
@@ -475,12 +493,11 @@ function isChatAvailable() {
   // Convert to IST (UTC+5:30)
   var utc = now.getTime() + now.getTimezoneOffset() * 60000;
   var ist = new Date(utc + (5.5 * 3600000));
-  var day = ist.getDay(); // 0=Sun, 1=Mon…6=Sat
   var hr  = ist.getHours();
   var min = ist.getMinutes();
   var totalMins = hr * 60 + min;
-  // Mon–Sat (1–6), 11:00–16:00 IST
-  return (day >= 1 && day <= 6) && (totalMins >= 660 && totalMins < 960);
+  // Every day (including Sunday), 11:00–16:00 IST
+  return (totalMins >= 660 && totalMins < 960);
 }
 
 function updateChatStatus() {
@@ -494,13 +511,13 @@ function updateChatStatus() {
     badge.className = 'status-badge online';
     dot.className   = 'dot green';
     statusT.textContent = 'Online Now';
-    metaT.textContent   = 'Mon–Sat · 11 AM – 4 PM';
+    metaT.textContent   = 'Every Day · 11 AM – 4 PM';
     card.classList.remove('disabled');
   } else {
     badge.className = 'status-badge offline';
     dot.className   = 'dot red';
     statusT.textContent = 'Offline';
-    metaT.textContent   = 'Available Mon–Sat, 11 AM–4 PM';
+    metaT.textContent   = 'Available Every Day, 11 AM–4 PM';
     card.classList.add('disabled');
   }
 }
@@ -522,7 +539,7 @@ function showToast(msg) {
 // ── Actions ──────────────────────────────────────────────────────────
 function openLiveChat() {
   if (!isChatAvailable()) {
-    showToast('⏰ Chat is offline · Available Mon–Sat 11AM–4PM');
+    showToast('⏰ Chat is offline · Available Every Day 11AM–4PM');
     return;
   }
   // Push latest uid (user may have typed it after page load)
