@@ -89,9 +89,9 @@
     padding: 0 24px;
   }
 
-  /* header elegance with larger logo */
+  /* header elegance with LARGE company logo */
   .hero {
-    padding: 64px 0 32px;
+    padding: 48px 0 28px;
     text-align: center;
     border-bottom: 1px solid var(--border-subtle);
     margin-bottom: 28px;
@@ -102,26 +102,40 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     position: relative;
   }
   .logo-block::before {
     content: '';
     position: absolute;
-    inset: -20px;
+    inset: -28px;
     border-radius: 60%;
     background: radial-gradient(circle, var(--red-glow), transparent 70%);
-    filter: blur(16px);
+    filter: blur(20px);
     opacity: 0.7;
   }
-  .logo {
-    height: 120px;  /* increased logo size for better presence */
+  /* MAIN LOGO - INCREASED SIZE SIGNIFICANTLY */
+  .company-logo {
+    display: block;
+    height: 160px;  /* dramatically increased from 120px to 160px */
     width: auto;
-    filter: drop-shadow(0 8px 20px rgba(217,45,45,0.6)) drop-shadow(0 0 12px rgba(217,45,45,0.3));
-    transition: transform 0.3s ease;
+    max-width: 280px;
+    filter: drop-shadow(0 12px 28px rgba(217,45,45,0.7)) drop-shadow(0 0 18px rgba(217,45,45,0.4));
+    transition: transform 0.3s ease, filter 0.3s ease;
+    animation: logoGlow 3s ease-in-out infinite;
   }
-  .logo:hover {
-    transform: scale(1.02);
+  .company-logo:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 15px 32px rgba(217,45,45,0.85)) drop-shadow(0 0 24px rgba(217,45,45,0.6));
+  }
+  
+  @keyframes logoGlow {
+    0%, 100% {
+      filter: drop-shadow(0 12px 28px rgba(217,45,45,0.6)) drop-shadow(0 0 12px rgba(217,45,45,0.3));
+    }
+    50% {
+      filter: drop-shadow(0 12px 32px rgba(217,45,45,0.85)) drop-shadow(0 0 20px rgba(217,45,45,0.5));
+    }
   }
 
   .title-group {
@@ -336,235 +350,8 @@
     color: var(--text-muted);
     font-weight: 500;
   }
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <meta name="description" content="Aura Battle - Official Free Fire MAX tournament platform. Play & win real cash prizes in daily tournaments.">
-    <meta name="keywords" content="aura battle, aura Batlle turnament app, free fire tournament app, aura battle app, download app, earn money playing free fire, free fire max competitions, withdraw upi from gaming, clash squad cash prizes, solo vs squad rewards, ff esports apk, instant withdrawal tournament app, play free fire earn paytm, battle royale rewards app, refer friends earn money, free fire gift card prizes">
-    <meta name="author" content="Aura Battle">
-    <meta name="google-site-verification" content="vc9q9pIcOAtZVPo0_lO88D2KSocZHwjjK0fsCRimX7M">
-    <title>Aura Battle Esports & Gaming</title>
-    
-    <!-- Favicon: unnamed.png for website icon and search engines -->
-    <link rel="icon" href="unnamed.png" type="image/png">
-    <link rel="shortcut icon" href="unnamed.png" type="image/png">
-    <link rel="apple-touch-icon" href="unnamed.png">
-    <link rel="manifest" href="site.webmanifest">
-    
-    <!-- WhatsApp/Social Media Share Card -->
-    <meta property="og:site_name" content="Aura Battle">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aurabattle.netlify.app/">
-    <meta property="og:title" content="🏆 Aura Battle - Free Fire MAX Tournaments">
-    <meta property="og:description" content="🔥 Compete & Win Real Cash Prizes! Join daily Free Fire MAX tournaments with instant withdrawals. Register now!">
-    <meta property="og:image" content="https://aurabattle.netlify.app/images/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Aura Battle Tournament Platform">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Oxanium:wght@600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* Base Styles */
-        :root {
-            --primary: #FF0000;
-            --secondary: #D10000;
-            --accent: #FF3333;
-            --dark: #0A0A0A;
-            --light: #F5F5F5;
-            --success: #00C853;
-            --dark-bg: #111111;
-            --card-bg: #1A1A1A;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background-color: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        /* Header Styles */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 12px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            background: rgba(17, 17, 17, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        
-        /* Show Flat_normal.jpg instead of aura battle text */
-        .header-logo-img {
-            height: 55px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.3));
-        }
-        
-        /* Hide old logo text */
-        .logo-text {
-            display: none;
-        }
-        
-        /* Navigation */
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul li a:hover {
-            color: var(--primary);
-        }
-        
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            font-size: 24px;
-            color: var(--light);
-            cursor: pointer;
-            z-index: 1001;
-        }
-        
-        /* Video Background */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .video-background video {
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Main Content */
-        main {
-            margin-top: 80px;
-        }
-        
-        section {
-            min-height: 100vh;
-            padding: 80px 5%;
-            position: relative;
-        }
-        
-        /* Hero Section */
-        #home {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            text-align: center;
-            height: 100vh;
-            padding-bottom: 150px;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin-bottom: 100px;
-        }
-        
-        .hero-heading {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease 2s;
-        }
-        
-        .hero-heading.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .hero-content h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        
-        .hero-content h1 span:first-child {
-            color: var(--primary);
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-        }
-        
-        .hero-content h1 span:last-child {
-            color: white;
-        }
-        
-        .hero-content h2 {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: var(--light);
-            opacity: 0.9;
-        }
-        
-        .stats-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-            width: 100%;
-            padding: 0 5%;
-            position: relative;
-            bottom: auto;
-        }
 
-  /* footer refined */
+  /* footer refined with larger logo */
   .footer {
     margin-top: 60px;
     padding: 32px 24px 48px;
@@ -573,14 +360,16 @@
     background: linear-gradient(0deg, rgba(3,1,1,0.96), transparent);
   }
   .footer-logo {
-    height: 52px;
-    opacity: 0.7;
-    filter: drop-shadow(0 0 8px rgba(217,45,45,0.5));
+    height: 68px;  /* increased footer logo size as well */
+    width: auto;
+    opacity: 0.75;
+    filter: drop-shadow(0 0 10px rgba(217,45,45,0.5));
     margin-bottom: 18px;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, transform 0.2s;
   }
   .footer-logo:hover {
-    opacity: 0.9;
+    opacity: 0.95;
+    transform: scale(1.02);
   }
   .footer p {
     font-size: 0.7rem;
@@ -597,19 +386,8 @@
     color: #5a4a4a;
     letter-spacing: 0.3px;
   }
-        .stat-box {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 10px;
-            padding: 15px 20px;
-            min-width: 120px;
-            width: calc(50% - 20px);
-            max-width: 180px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            box-sizing: border-box;
-        }
 
+  /* Responsive adjustments for logo size */
   @media (max-width: 700px) {
     .container {
       padding: 0 16px;
@@ -636,17 +414,23 @@
     .mode-panel {
       margin: 12px 18px 6px;
     }
-    .logo {
-      height: 90px; /* still larger than original but responsive */
+    /* Responsive logo - still large but scales nicely on mobile */
+    .company-logo {
+      height: 110px;  /* still significantly larger than original, but fits mobile screens */
+      max-width: 200px;
+    }
+    .footer-logo {
+      height: 52px;
     }
   }
-        .stat-number {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
+
+  /* For extra small devices, ensure logo doesn't overflow */
+  @media (max-width: 480px) {
+    .company-logo {
+      height: 95px;
+      max-width: 180px;
+    }
+  }
 
   /* animations */
   @keyframes fadeSlideUp {
@@ -667,678 +451,6 @@
     opacity: 1;
   }
 </style>
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--light);
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Download Button - will show after 1 second via JS */
-        .download-container {
-            position: relative;
-            margin: 40px 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-        
-        .download-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 18px 40px;
-            border-radius: 0;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
-            z-index: 1;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
-        }
-        
-        .download-btn:active {
-            transform: scale(1);
-        }
-        
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .download-btn:hover::before {
-            opacity: 1;
-        }
-        
-        .download-btn .icon {
-            margin-left: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .download-btn .flare {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 45px;
-            transform: skewX(-45deg);
-            animation: flareAnimation 3s infinite linear;
-            background: rgba(255, 255, 255, 0.4);
-            left: -150%;
-        }
-        
-        @keyframes flareAnimation {
-            0% { left: -150%; }
-            100% { left: 150%; }
-        }
-        
-        .download-info {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* Scroll Down Indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--light);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .scroll-down::after {
-            content: '';
-            width: 2px;
-            height: 50px;
-            background: var(--primary);
-            margin-top: 10px;
-            animation: scrollAnimation 2s infinite;
-        }
-        
-        @keyframes scrollAnimation {
-            0% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(20px); opacity: 0.5; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        
-        /* About Section */
-        #about {
-            background: var(--dark-bg);
-            padding-top: 200px;
-        }
-        
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .about-content h3 {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .about-content p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .features {
-            margin-top: 30px;
-        }
-        
-        .features h4 {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-        
-        .features ul {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            list-style: none;
-        }
-        
-        .features li {
-            display: flex;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .features li i {
-            color: var(--primary);
-            margin-right: 10px;
-            font-size: 0.9rem;
-        }
-        
-        /* Tournaments Section */
-        .section-title {
-            text-align: center;
-            font-family: 'Oxanium', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .tournament-cards {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .tournament-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            width: 300px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .tournament-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
-            border-color: var(--primary);
-        }
-        
-        .tournament-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        
-        .tournament-details {
-            padding: 20px;
-        }
-        
-        .tournament-type {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .tournament-prize {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .tournament-info {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        
-        .tournament-rules {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.2);
-        }
-        
-        .tournament-rules h4 {
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-        
-        .tournament-rules ul {
-            list-style: none;
-        }
-        
-        .tournament-rules li {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 5px;
-            position: relative;
-            padding-left: 15px;
-        }
-        
-        .tournament-rules li::before {
-            content: '•';
-            color: var(--primary);
-            position: absolute;
-            left: 0;
-        }
-        
-        /* Contact Section */
-        #contact {
-            background: var(--dark-bg);
-        }
-        
-        .contact-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .contact-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            width: 300px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
-            border-color: var(--primary);
-        }
-        
-        .contact-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .contact-card h3 {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-        
-        .contact-card p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .contact-btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-btn:hover {
-            background: var(--secondary);
-        }
-        
-        .social-media {
-            margin-top: 50px;
-            text-align: center;
-        }
-        
-        .social-media h3 {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--light);
-            transition: all 0.3s ease;
-        }
-        
-        .social-icon:hover {
-            background: var(--primary);
-            transform: translateY(-5px);
-        }
-        
-        /* Terms Section */
-        #terms {
-            background: var(--dark-bg);
-        }
-        
-        .terms-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .terms-section {
-            margin-bottom: 30px;
-        }
-        
-        .terms-section h3 {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .terms-section ul {
-            list-style: none;
-        }
-        
-        .terms-section li {
-            margin-bottom: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            position: relative;
-            padding-left: 20px;
-        }
-        
-        .terms-section li::before {
-            content: '▹';
-            color: var(--primary);
-            position: absolute;
-            left: 0;
-        }
-        
-        .view-full-terms {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .terms-full-btn {
-            display: inline-block;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 12px 30px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .terms-full-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* Game Rules Section */
-        #rules {
-            background: var(--dark-bg);
-        }
-        
-        .rules-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .rules-category {
-            margin-bottom: 30px;
-        }
-        
-        .rules-category h3 {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-        }
-        
-        .rules-list {
-            list-style: none;
-        }
-        
-        .rules-list li {
-            margin-bottom: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            position: relative;
-            padding-left: 20px;
-        }
-        
-        .rules-list li::before {
-            content: '✓';
-            color: var(--success);
-            position: absolute;
-            left: 0;
-        }
-        
-        /* Footer */
-        footer {
-            background: #000;
-            padding: 30px 5%;
-            text-align: center;
-            border-top: 1px solid rgba(255, 0, 0, 0.3);
-        }
-        
-        .footer-logo {
-            font-family: 'Oxanium', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-        
-        .copyright {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
-        }
-        
-        /* Responsive Design - Mobile Screen Support */
-        @media (max-width: 992px) {
-            nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                height: 100vh;
-                background: var(--dark-bg);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: right 0.3s ease;
-                z-index: 1000;
-                border-left: 1px solid rgba(255, 0, 0, 0.3);
-            }
-            
-            nav ul.active {
-                right: 0;
-            }
-            
-            nav ul li {
-                margin: 20px 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-            
-            .features ul {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .stats-container {
-                gap: 20px;
-                position: relative;
-                bottom: -50px;
-            }
-            
-            .stat-box {
-                padding: 15px 20px;
-                min-width: 140px;
-            }
-            
-            .stat-number {
-                font-size: 2rem;
-            }
-            
-            .about-content, .terms-content, .rules-container {
-                padding: 30px;
-            }
-            
-            .header-logo-img {
-                height: 45px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .hero-content h2 {
-                font-size: 1.2rem;
-            }
-            
-            .download-btn {
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .tournament-card {
-                width: 100%;
-            }
-            
-            .contact-card {
-                width: 100%;
-            }
-            
-            .about-content, .terms-content, .rules-container {
-                padding: 20px;
-            }
-            
-            .stats-container {
-                gap: 15px;
-            }
-            
-            .stat-box {
-                min-width: 120px;
-                padding: 10px 15px;
-            }
-            
-            .header-logo-img {
-                height: 40px;
-            }
-        }
-    </style>
 </head>
 <body>
 <div class="bg-aura"></div>
@@ -1347,17 +459,12 @@
 <div class="container">
   <div class="hero">
     <div class="logo-block">
-      <img class="logo" src="https://i.imghippo.com/files/lrd9557rkc.png" alt="Aura Battle">
+      <!-- LARGE COMPANY LOGO - SIZE INCREASED TO 160px height -->
+      <img class="company-logo" src="https://i.imghippo.com/files/lrd9557rkc.png" alt="Aura Battle - Official Logo">
     </div>
     <div class="title-group">
       <h1>Terms of Engagement</h1>
       <div class="badge">⚡ Last updated <strong>March 2026</strong> — binding agreement</div>
-    <!-- Video Background -->
-    <div class="video-background">
-        <video autoplay muted loop id="bgVideo">
-            <source src="background-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
     </div>
   </div>
 
@@ -1376,11 +483,6 @@
       <div class="header-icon">⚔️</div>
       <h2>Match Integrity Code</h2>
       <span class="rule-count">8 articles</span>
-    
-<!-- Header -->
-<header>
-    <div class="logo-container">
-        <img src="Flat_normal.jpg" alt="Aura Battle Logo" style="height:50px;object-fit:contain;max-width:220px;">
     </div>
     <div class="rules-list">
       <div class="rule-item highlight"><div class="rule-num">01</div><div class="rule-text"><strong>Screen recording is mandatory</strong> throughout every match — failure voids eligibility.</div></div>
@@ -1391,62 +493,8 @@
       <div class="rule-item highlight"><div class="rule-num">06</div><div class="rule-text">Registered in-game ID only — alias or alt accounts lead to disqualification.</div></div>
       <div class="rule-item highlight"><div class="rule-num">07</div><div class="rule-text"><strong>Team-ups / collusion strictly forbidden</strong>; algorithmic detection + manual review.</div></div>
       <div class="rule-item"><div class="rule-num">08</div><div class="rule-text">Match-specific “About” section overrides general terms; read before joining.</div></div>
-    
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-            <li><a href="#terms">Terms</a></li>
-            <li><a href="#rules">Game Rules</a></li>
-        </ul>
-    </nav>
-    
-    <div class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
     </div>
   </div>
-</header>
-    <!-- Main Content -->
-    <main>
-        <!-- Home Section -->
-        <section id="home">
-            <div class="hero-content">
-                <div class="hero-heading">
-                    <h1><span>AURA</span> <span>BATTLE</span></h1>
-                    <h2>THE ULTIMATE FREE FIRE TOURNAMENT PLATFORM</h2>
-                </div>
-                
-                <div class="download-container" id="downloadContainer">
-                    <button class="download-btn" id="downloadButton">
-                        Download Now
-                        <span class="icon"><i class="fas fa-download"></i></span>
-                        <span class="flare"></span>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="stats-container">
-                <div class="stat-box">
-                    <div class="stat-number" id="prizeCount">₹0</div>
-                    <div class="stat-label">Daily Prizes Up to</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="playerCount">0</div>
-                    <div class="stat-label">Active Players</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="tournamentCount">0</div>
-                    <div class="stat-label">Tournaments UP to</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="winnerCount">0</div>
-                    <div class="stat-label">Daily Winners</div>
-                </div>
-            </div>
-            
-            <div class="scroll-down">Scroll Down</div>
-        </section>
 
   <!-- LW & CS -->
   <div class="terms-card" id="lwcs">
@@ -1465,31 +513,6 @@
       <div class="rule-item highlight"><div class="rule-num">02</div><div class="rule-text"><strong>Team number ≡ Slot number</strong> – letters <strong>A, B, C, D</strong> represent spot positions within each slot; deviation = DQ.</div></div>
     </div>
   </div>
-        <!-- About Us Section -->
-        <section id="about">
-            <h2 class="section-title">ABOUT US</h2>
-            
-            <div class="about-content">
-                <h3>Welcome to Aura Battle</h3>
-                <p>Aura Battle is the premier platform for Free Fire MAX tournaments where players can showcase their skills and earn real money rewards. Founded by passionate gamers, we aim to create a fair and exciting competitive environment for Free Fire enthusiasts.</p>
-                
-                <p>Our platform connects players from across the region to compete in daily tournaments with cash prizes. Whether you're a casual player or a competitive gamer, Aura Battle offers tournaments for all skill levels.</p>
-                
-                <div class="features">
-                    <h4>Why Choose Aura Battle?</h4>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Instant prize withdrawals</li>
-                        <li><i class="fas fa-check-circle"></i> 24/7 customer support</li>
-                        <li><i class="fas fa-check-circle"></i> Fair matchmaking system</li>
-                        <li><i class="fas fa-check-circle"></i> Secure payment gateway</li>
-                        <li><i class="fas fa-check-circle"></i> Daily tournaments</li>
-                        <li><i class="fas fa-check-circle"></i> Real-time leaderboards</li>
-                        <li><i class="fas fa-check-circle"></i> Anti-cheat protection</li>
-                        <li><i class="fas fa-check-circle"></i> Exciting game modes</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
 
   <!-- Withdraw Terms -->
   <div class="terms-card" id="withdraw">
@@ -1504,68 +527,6 @@
       <div class="rule-item"><div class="rule-num">03</div><div class="rule-text">Google Play / Amazon gift card codes appear in <span class="inline-badge">Transaction History → Withdrawals</span> after approval.</div></div>
     </div>
   </div>
-        <!-- Tournaments Section -->
-        <section class="tournaments-section">
-            <h2 class="section-title">FEATURED TOURNAMENTS</h2>
-            
-            <div class="tournament-cards">
-                <div class="tournament-card">
-                    <img src="https://imgmedia.larepublica.pe/675x391/larepublica/original/2021/08/28/612a6f5571b0a02253132e02.webp" alt="Solo Tournament" class="tournament-image">
-                    <div class="tournament-details">
-                        <h3 class="tournament-type">SOLO BATTLE</h3>
-                        <div class="tournament-prize">Up to ₹500 Daily Prize Pool</div>
-                        <p class="tournament-info">Test your individual skills against the best Free Fire players. Winner takes all in this intense solo competition.</p>
-                        
-                        <div class="tournament-rules">
-                            <h4>Basic Rules:</h4>
-                            <ul>
-                                <li>Single player only</li>
-                                <li>No teaming allowed</li>
-                                <li>10 matches per day</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tournament-card">
-                    <img src="https://gamesbeat.com/wp-content/uploads/2025/05/Free-Fire-Bomb-Squad.jpg" alt="Squad Tournament" class="tournament-image">
-                    <div class="tournament-details">
-                        <h3 class="tournament-type">SQUAD WARS</h3>
-                        <div class="tournament-prize">Up to ₹5,000 Weekly Prize</div>
-                        <p class="tournament-info">Bring your squad and compete for glory. Teamwork and strategy will lead you to victory and cash rewards.</p>
-                        
-                        <div class="tournament-rules">
-                            <h4>Basic Rules:</h4>
-                            <ul>
-                                <li>4-player teams</li>
-                                <li>Points based on kills & placement</li>
-                                <li>3 matches per day</li>
-                                <li>No player substitutions</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tournament-card">
-                    <img src="https://beritabooyah.id/wp-content/uploads/2020/01/FreeFire6.jpg" alt="Aura League" class="tournament-image">
-                    <div class="tournament-details">
-                        <h3 class="tournament-type">Duo</h3>
-                        <div class="tournament-prize">Up to ₹2,000 Monthly</div>
-                        <p class="tournament-info">The ultimate championship for elite players. Compete over a month-long season for massive cash prizes.</p>
-                        
-                        <div class="tournament-rules">
-                            <h4>Basic Rules:</h4>
-                            <ul>
-                                <li>Invitation only</li>
-                                <li>30-day season</li>
-                                <li>Daily matches</li>
-                                <li>Cumulative scoring</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
   <!-- Add Money -->
   <div class="terms-card" id="addmoney">
@@ -1584,39 +545,6 @@
       <div class="rule-item highlight"><div class="rule-num">07</div><div class="rule-text">Pending/Hold transactions: Click “Yes, I have paid” and wait for reconciliation; never double pay.</div></div>
     </div>
   </div>
-        <!-- Contact Us Section - Support option removed, livechat redirects to Supportchat.html -->
-        <section id="contact">
-            <h2 class="section-title">CONTACT US</h2>
-            
-            <div class="contact-container">
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Live Chat</h3>
-                    <p>Get instant support from our team 24/7 for any questions or issues you may have.</p>
-                    <a href="Supportchat.html" class="contact-btn">Start Chat</a>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Email Us</h3>
-                    <p>Send us an email and we'll respond within 24 hours to address your concerns.</p>
-                    <a href="mailto:suport.aurabattle@gmail.com" class="contact-btn">Send Email</a>
-                </div>
-            </div>
-            
-            <div class="social-media">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/aura_battle.app/" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@AuraBattle-i1s" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://whatsapp.com/channel/0029Vb6d7Ig9cDDb3Vde6I3F" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </section>
 
   <!-- Account & Privacy -->
   <div class="terms-card" id="account">
@@ -1631,48 +559,6 @@
       <div class="rule-item"><div class="rule-num">03</div><div class="rule-text">Notification tokens (FCM) used exclusively for match alerts & transactional updates — never shared.</div></div>
     </div>
   </div>
-        <!-- Terms Section - Updated with redirect to Terms&Condition.html -->
-        <section id="terms">
-            <h2 class="section-title">TERMS & CONDITIONS</h2>
-            
-            <div class="terms-content">
-                <div class="terms-section">
-                    <h3>Participation Terms</h3>
-                    <ul>
-                        <li>Players must be at least 18 years old or have parental consent to participate in cash tournaments.</li>
-                        <li>All participants must register with valid information and maintain one account only.</li>
-                        <li>Any form of cheating, hacking, or unfair advantage will result in permanent ban.</li>
-                        <li>Tournament prizes are subject to taxation as per government regulations.</li>
-                        <li>Aura Battle reserves the right to modify tournament rules and prizes without prior notice.</li>
-                    </ul>
-                </div>
-                
-                <div class="terms-section">
-                    <h3>Payment Terms</h3>
-                    <ul>
-                        <li>All tournament entry fees are non-refundable once the tournament has started.</li>
-                        <li>Prize money will be transferred within 48 hours of tournament completion.</li>
-                        <li>Players are responsible for providing correct payment details for prize distribution.</li>
-                        <li>Aura Battle is not responsible for any bank charges or transfer fees.</li>
-                        <li>Minimum withdrawal amount is ₹100 for all payment methods.</li>
-                    </ul>
-                </div>
-                
-                <div class="terms-section">
-                    <h3>Account Security</h3>
-                    <ul>
-                        <li>Players are responsible for maintaining the security of their account credentials.</li>
-                        <li>Sharing accounts is strictly prohibited and may result in permanent ban.</li>
-                        <li>Aura Battle will never ask for your password via email or chat.</li>
-                        <li>Report any suspicious activity on your account immediately to our support team.</li>
-                    </ul>
-                </div>
-                
-                <div class="view-full-terms">
-                    <a href="Terms&Condition.html" class="terms-full-btn">View Full Terms & Conditions →</a>
-                </div>
-            </div>
-        </section>
 
   <!-- Prohibited Rules -->
   <div class="terms-card" id="prohibited">
@@ -1689,56 +575,6 @@
       <div class="rule-item highlight"><div class="rule-num">05</div><div class="rule-text">Never share mobile/email with unofficial “staff”. Our agents only ask for <strong>Transaction ID, User ID, Referral Code, or Account name</strong>.</div></div>
     </div>
   </div>
-        <!-- Game Rules Section -->
-        <section id="rules">
-            <h2 class="section-title">GAME RULES</h2>
-            
-            <div class="rules-container">
-                <div class="rules-category">
-                    <h3>General Rules</h3>
-                    <ul class="rules-list">
-                        <li>All matches must be played on Free Fire MAX version</li>
-                        <li>Players must join the match within 5 minutes of tournament start time</li>
-                        <li>Intentional disconnections may result in disqualification</li>
-                        <li>Players must use their registered in-game name</li>
-                        <li>Any form of teaming in solo matches is prohibited</li>
-                    </ul>
-                </div>
-                
-                <div class="rules-category">
-                    <h3>Prohibited Actions</h3>
-                    <ul class="rules-list">
-                        <li>No use of hacks, cheats, or modified game clients</li>
-                        <li>No account sharing or boosting</li>
-                        <li>No use of VPN to manipulate matchmaking</li>
-                        <li>No offensive or inappropriate in-game names</li>
-                        <li>No match fixing or collusion between players</li>
-                    </ul>
-                </div>
-                
-                <div class="rules-category">
-                    <h3>Prize Distribution</h3>
-                    <ul class="rules-list">
-                        <li>Prizes will be awarded based on final tournament standings</li>
-                        <li>Tie-breakers will be determined by kill count then damage dealt</li>
-                        <li>Players must claim prizes within 7 days of tournament completion</li>
-                        <li>Unclaimed prizes will be forfeited after 30 days</li>
-                        <li>All prize decisions by Aura Battle admins are final</li>
-                    </ul>
-                </div>
-                
-                <div class="rules-category">
-                    <h3>Dispute Resolution</h3>
-                    <ul class="rules-list">
-                        <li>All disputes must be reported within 24 hours of tournament completion</li>
-                        <li>Evidence (screenshots/videos) must be provided for all claims</li>
-                        <li>Aura Battle will investigate and resolve disputes within 3 business days</li>
-                        <li>False reports may result in account suspension</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
 
   <div class="footer">
     <img class="footer-logo" src="https://i.imghippo.com/files/lrd9557rkc.png" alt="Aura Battle">
@@ -1747,22 +583,6 @@
     <div class="version-badge">📅 Terms version 2.4 — effective March 2026</div>
   </div>
 </div>
-    <!-- Footer - removed support option from footer links -->
-    <footer>
-        <div class="footer-logo">AURA BATTLE</div>
-        
-        <div class="footer-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <a href="#terms">Terms</a>
-            <a href="#rules">Rules</a>
-        </div>
-        
-        <div class="copyright">
-            &copy; 2025 Aura Battle. All rights reserved. Not affiliated with Garena or Free Fire.
-        </div>
-    </footer>
 
 <script>
   (function() {
@@ -1778,63 +598,6 @@
             const href = link.getAttribute('href')?.substring(1);
             if (href === activeId) {
               link.classList.add('active');
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Menu Toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const nav = document.querySelector('nav ul');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                nav.classList.toggle('active');
-                mobileMenuBtn.innerHTML = nav.classList.contains('active') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth <= 992) {
-                        nav.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                });
-            });
-            
-            // Show elements after delay - Hero heading appears after 2s
-            setTimeout(() => {
-                document.querySelector('.hero-heading').classList.add('visible');
-                document.querySelector('.logo-text .play-win').style.opacity = '1';
-                document.querySelector('.logo-text .play-win').style.transform = 'translateY(0)';
-                document.querySelector('.logo-text .aura-battle').style.opacity = '1';
-                document.querySelector('.logo-text .aura-battle').style.transform = 'translateY(0)';
-            }, 2000);
-            
-            // SHOW DOWNLOAD BUTTON AFTER 1 SECOND (NEW REQUIREMENT)
-            setTimeout(() => {
-                const downloadContainer = document.getElementById('downloadContainer');
-                if (downloadContainer) {
-                    downloadContainer.classList.add('visible');
-                }
-            }, 1000);
-            
-            // Animated Counter for Stats
-            function animateValue(id, start, end, duration) {
-                const obj = document.getElementById(id);
-                if (!obj) return;
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    if (id === 'prizeCount') {
-                        obj.innerHTML = '₹' + Math.floor(progress * (end - start) + start).toLocaleString();
-                    } else {
-                        obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
-                    }
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
             }
           });
         }
@@ -1858,79 +621,5 @@
     });
   })();
 </script>
-            
-            // Start counters when section is in view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateValue('prizeCount', 0, 85000, 2000);
-                        animateValue('playerCount', 0, 12500, 2000);
-                        animateValue('tournamentCount', 0, 142, 1500);
-                        animateValue('winnerCount', 0, 5380, 1500);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {threshold: 0.5});
-            
-            observer.observe(document.getElementById('home'));
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Scroll down button functionality
-            const scrollDown = document.querySelector('.scroll-down');
-            if (scrollDown) {
-                scrollDown.addEventListener('click', function() {
-                    const aboutSection = document.querySelector('#about');
-                    if (aboutSection) {
-                        aboutSection.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            }
-            
-            // Auto-play video
-            const bgVideo = document.getElementById('bgVideo');
-            if (bgVideo) {
-                bgVideo.muted = true;
-                bgVideo.play().catch(e => console.log('Video autoplay prevented:', e));
-            }
-            
-            // Download button functionality
-            const downloadBtn = document.getElementById('downloadButton');
-            if (downloadBtn) {
-                downloadBtn.addEventListener('click', function() {
-                    const link = document.createElement('a');
-                    link.href = 'AuraBattle.apk';
-                    link.download = 'AuraBattle.apk';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                });
-            }
-            
-            // Responsive nav adjustment
-            function handleResize() {
-                if (window.innerWidth > 992) {
-                    if (nav) nav.classList.remove('active');
-                    if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            }
-            
-            window.addEventListener('resize', handleResize);
-            handleResize();
-        });
-    </script>
 </body>
 </html>
