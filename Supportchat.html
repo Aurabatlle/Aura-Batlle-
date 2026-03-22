@@ -325,18 +325,9 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Hide Tawk.to default bottom corner widget bubble */
-  #tawkchat-container,
-  .tawk-min-container,
-  .tawk-button-container,
-  [id^="tawkchat"],
-  iframe[src*="tawk.to"],
-  div[style*="tawk"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
+  /* Hide only the Tawk.to default floating bubble button in the corner
+     The chat window itself still works when opened via Tawk_API.maximize() */
+  .tawk-min-container { display: none !important; }
 </style>
 </head>
 <body>
@@ -374,7 +365,7 @@
         <div class="card-icon">💬</div>
         <div class="card-info">
           <div class="card-title">Live Chat</div>
-          <div class="card-desc">Connect with our team in real-time. Available every day 11AM–4PM IST.</div>
+          <div class="card-desc">Connect with our team in real-time. Available every day 7AM–11PM IST.</div>
         </div>
         <div class="card-arrow">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
@@ -416,7 +407,7 @@
   <div class="info-box">
     <div class="info-row">
       <span class="info-emoji">🕐</span>
-      <span class="info-text"><strong>Chat Hours:</strong> Every Day, 11:00 AM – 4:00 PM (IST)</span>
+      <span class="info-text"><strong>Chat Hours:</strong> Every Day, 7:00 AM – 11:00 PM (IST)</span>
     </div>
     <div class="info-row">
       <span class="info-emoji">🎫</span>
@@ -462,10 +453,16 @@ var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
 
 // ── Tawk.to: push visitor info as soon as widget is ready ────────────
 Tawk_API.onLoad = function() {
+  // Hide the floating bubble — we control chat opening via our own card
+  try { Tawk_API.hideWidget(); } catch(e){}
   pushVisitorInfo();
 };
 Tawk_API.onChatStarted = function() {
   pushVisitorInfo();
+};
+Tawk_API.onChatEnded = function() {
+  // Hide bubble again after chat ends
+  try { Tawk_API.hideWidget(); } catch(e){}
 };
 Tawk_API.onStatusChange = function() {
   pushVisitorInfo();
@@ -496,8 +493,8 @@ function isChatAvailable() {
   var hr  = ist.getHours();
   var min = ist.getMinutes();
   var totalMins = hr * 60 + min;
-  // Every day (including Sunday), 11:00–16:00 IST
-  return (totalMins >= 660 && totalMins < 960);
+  // Every day (including Sunday), 7:00 AM – 11:00 PM IST
+  return (totalMins >= 420 && totalMins < 1380);
 }
 
 function updateChatStatus() {
@@ -511,13 +508,13 @@ function updateChatStatus() {
     badge.className = 'status-badge online';
     dot.className   = 'dot green';
     statusT.textContent = 'Online Now';
-    metaT.textContent   = 'Every Day · 11 AM – 4 PM';
+    metaT.textContent   = 'Every Day · 7 AM – 11 PM';
     card.classList.remove('disabled');
   } else {
     badge.className = 'status-badge offline';
     dot.className   = 'dot red';
     statusT.textContent = 'Offline';
-    metaT.textContent   = 'Available Every Day, 11 AM–4 PM';
+    metaT.textContent   = 'Available Every Day, 7 AM–11 PM';
     card.classList.add('disabled');
   }
 }
@@ -539,7 +536,7 @@ function showToast(msg) {
 // ── Actions ──────────────────────────────────────────────────────────
 function openLiveChat() {
   if (!isChatAvailable()) {
-    showToast('⏰ Chat is offline · Available Every Day 11AM–4PM');
+    showToast('⏰ Chat is offline · Available Every Day 7AM–11PM');
     return;
   }
   // Push latest uid (user may have typed it after page load)
