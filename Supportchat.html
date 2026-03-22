@@ -328,6 +328,46 @@
   /* Hide only the Tawk.to default floating bubble button in the corner
      The chat window itself still works when opened via Tawk_API.maximize() */
   .tawk-min-container { display: none !important; }
+
+  /* Round loading overlay */
+  .loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.82);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    gap: 18px;
+  }
+  .loading-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .spinner {
+    width: 72px;
+    height: 72px;
+    border: 6px solid rgba(220, 38, 38, 0.15);
+    border-top: 6px solid #FF0000;
+    border-right: 6px solid #FF0000;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    box-shadow: 0 0 24px rgba(255, 0, 0, 0.4);
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .loading-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 </style>
 </head>
 <body>
@@ -420,6 +460,12 @@
   </div>
 </div>
 
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Opening Chat…</div>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
@@ -463,6 +509,10 @@ Tawk_API.onChatStarted = function() {
 Tawk_API.onChatEnded = function() {
   // Hide bubble again after chat ends
   try { Tawk_API.hideWidget(); } catch(e){}
+};
+Tawk_API.onChatMaximized = function() {
+  // Chat window is open — hide the spinner immediately
+  hideLoading();
 };
 Tawk_API.onStatusChange = function() {
   pushVisitorInfo();
@@ -534,6 +584,13 @@ function showToast(msg) {
 }
 
 // ── Actions ──────────────────────────────────────────────────────────
+function showLoading() {
+  document.getElementById('loadingOverlay').classList.add('show');
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('show');
+}
+
 function openLiveChat() {
   if (!isChatAvailable()) {
     showToast('⏰ Chat is offline · Available Every Day 7AM–11PM');
@@ -541,10 +598,28 @@ function openLiveChat() {
   }
   // Push latest uid (user may have typed it after page load)
   pushVisitorInfo();
+
+  // Show round loading spinner
+  showLoading();
+
   try {
     Tawk_API.maximize();
+    // Hide spinner after short delay — chat window takes ~600ms to appear
+    setTimeout(hideLoading, 1200);
   } catch(e) {
+    hideLoading();
     showToast('Loading chat widget…');
+    // Retry after 1.5s in case Tawk hasn't fully loaded yet
+    setTimeout(function() {
+      try {
+        showLoading();
+        Tawk_API.maximize();
+        setTimeout(hideLoading, 1200);
+      } catch(e2) {
+        hideLoading();
+        showToast('Chat unavailable. Please try again.');
+      }
+    }, 1500);
   }
 }
 
