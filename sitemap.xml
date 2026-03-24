@@ -9,23 +9,11 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Support Systems (Updated biannually) -->
-  <url>
-    <loc>https://aurabattle-helps.10001mb.com/?i=1</loc>
-    <lastmod>2025-06-01</lastmod>  <!-- Mid-year review -->
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<url>
+  <loc>https://yourwebsite.com/Supportchat.html</loc>
+</url>
 
-  <!-- Social Profiles (Updated monthly) -->
-  <url>
-    <loc>https://www.instagram.com/aura_battle.app</loc>
-    <lastmod>2025-01-10</lastmod>  <!-- Recent post -->
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://youtube.com/@aurabattle-i1s</loc>
-    <lastmod>2025-01-05</lastmod>  <!-- Latest upload -->
-    <changefreq>weekly</changefreq>
-  </url>
+<url>
+  <loc>https://yourwebsite.com/Terms&Condition.html.html</loc>
+</url>
 </urlset>
